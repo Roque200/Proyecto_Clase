@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+.oswald-titulo {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+/* --- Redes sociales estilo CodePen --- */
+
+/* contenedor de botones */
+footer .social-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 18px;
+  border-radius: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* enlaces */
+footer .social-buttons a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* limpiar conflictos de .fa global */
+footer .social-buttons .fa {
+  all: unset;
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* círculo */
+footer .social-buttons .social-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.45s ease, background-color 0.25s ease, color 0.25s ease;
+  will-change: transform;
+}
+
+footer .social-buttons .social-icon i {
+  font-size: 22px;
+  color: inherit;
+}
+
+/* animación */
+footer .social-buttons .social-icon:hover {
+  transform: rotate(360deg) scale(1.15);
+}
+
+/* colores por red */
+footer .social-buttons .facebook { background:#3b5998; border-color:#3b5998; color:#fff; }
+footer .social-buttons .facebook:hover { background:#fff; color:#3b5998; }
+
+footer .social-buttons .twitter { background:#55acee; border-color:#55acee; color:#fff; }
+footer .social-buttons .twitter:hover { background:#fff; color:#55acee; }
+
+footer .social-buttons .pinterest { background:#cb2027; border-color:#cb2027; color:#fff; }
+footer .social-buttons .pinterest:hover { background:#fff; color:#cb2027; }
+
+footer .social-buttons .linkedin { background:#0976b4; border-color:#0976b4; color:#fff; }
+footer .social-buttons .linkedin:hover { background:#fff; color:#0976b4; }
+
+footer .social-buttons .github { background:#333; border-color:#333; color:#fff; }
+footer .social-buttons .github:hover { background:#fff; color:#333; }
+
+footer .social-buttons .youtube { background:#bb0000; border-color:#bb0000; color:#fff; }
+footer .social-buttons .youtube:hover { background:#fff; color:#bb0000; }
+
+footer .social-buttons .behance { background:#1769ff; border-color:#1769ff; color:#fff; }
+footer .social-buttons .behance:hover { background:#fff; color:#1769ff; }
+
+footer .social-buttons .soundcloud { background:#ff3a00; border-color:#ff3a00; color:#fff; }
+footer .social-buttons .soundcloud:hover { background:#fff; color:#ff3a00; }
+
+/* responsive */
