@@ -8,20 +8,20 @@
                     <table class="table table-investigadores">
                         <thead>
                             <tr>
-                                <th>Nombre de laa Institucion</th>
+                                <th>Nombre de la Institucion</th>
                                 <th>Foto</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><?php echo $institucion['intituto']; ?> </td>
-                                <td><img src="images/institucion/<?php echo $institucion['logotipo'];?> alt="Dr. Carlos Mendoza class="investigator-photo">
+                                <td><?php echo $institucion['instituto']; ?> </td>
+                                <td><img src="images/instituciones/<?php echo ($institucion['logotipo']); ?>" class="rounded-circle border shadow-sm" width="100" height="100">
                                 </td>
                             </tr>    
                         </tbody>
                     </table>
                 </div>
             </div>
-            <?php endforeach; ?>
         </section>
+        <?php endforeach; ?>
     </main>

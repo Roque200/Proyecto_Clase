@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <h1>Instituciones</h1>
+    <h1>investigado$investigadores</h1>
     
     <div class="btn-group mb-3" role="group" aria-label="Basic mixed styles example">
         <a class="btn btn-primary">
@@ -15,23 +15,28 @@
             <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Logotipo</th>
+                    <th scope="col">Fotografía</th> 
+                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Segundo Apellido</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Institución</th>
-                    <th scope="col">Opciones</th>
-                </tr>
+                    <th scope="col">Semblanza</th>
+                    <th scope="col">Tratamiento</th>
+                    <th scope="col">Acciones</th>
+                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($data)): ?>
-                    <?php foreach($data as $institucion): ?>
+                    <?php foreach($data as $investigador): ?>
                     <tr>
-                        <th scope="row"><?php echo ($institucion['id_institucion']); ?></th>
+                        <th scope="row"><?php echo ($investigador['id_investigador']); ?></th>
                         <td>
-                            <?php if (!empty($institucion['logotipo'])): ?>
-                                <img src="../images/instituciones/<?php echo ($institucion['logotipo']); ?>" 
+                            <?php if (!empty($investigador['fotografia'])): ?>
+                                <img src="../images/investigador/<?php echo ($investigador['fotografia']); ?>" 
                                      width="75" height="75" 
                                      class="rounded-circle border" 
-                                     alt="Logo <?php echo ($institucion['instituto']); ?>"
-                                     onerror="this.src='../images/instituciones/default.png'">
+                                     alt="Foto <?php echo ($investigador['nombre']); ?>"
+                                     onerror="this.src='../images/investigador/default.png'">
                             <?php else: ?>
                                 <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" 
                                      style="width: 75px; height: 75px;">
@@ -39,16 +44,16 @@
                                 </div>
                             <?php endif; ?>
                         </td>
-                        <td><?php echo ($institucion['instituto']); ?></td>
+                        <td><?php echo ($investigador['investigador']); ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Opciones">
-                                <a href="institucion.php?action=update&id=<?php echo $institucion['id_institucion']; ?>" 
+                                <a href="investigador.php?action=update&id=<?php echo $investigador['id_investigador']; ?>" 
                                    class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
-                                <a href="institucion.php?action=delete&id=<?php echo $institucion['id_institucion']; ?>" 
+                                <a href="investigador.php?action=delete&id=<?php echo $investigador['id_investigador']; ?>" 
                                    class="btn btn-danger btn-sm"
-                                   onclick="return confirm('¿Está seguro de que desea eliminar esta institución?')">
+                                   onclick="return confirm('¿Está seguro de que desea eliminar este investigador?')">
                                     <i class="fas fa-trash"></i> Eliminar
                                 </a>
                             </div>
@@ -58,7 +63,7 @@
                 <?php else: ?>
                     <tr>
                         <td colspan="4" class="text-center text-muted py-4">
-                            <i class="fas fa-info-circle"></i> No hay instituciones registradas
+                            <i class="fas fa-info-circle"></i> No hay investigadores registrados
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -70,7 +75,7 @@
         <div class="mt-3">
             <small class="text-muted">
                 <i class="fas fa-info-circle"></i> 
-                Total de instituciones: <?php echo count($data); ?>
+                Total de investigadores: <?php echo count($data); ?>
             </small>
         </div>
     <?php endif; ?>

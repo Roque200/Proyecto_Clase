@@ -207,7 +207,7 @@ include_once("./views/header.php");
                 </div>
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="images/IA" class="card-img-top" alt="...">
+                        <img src="images/IA.jpeg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Inteligencia Artificial</h5>
                             <p class="card-text">Aplicamos técnicas de machine learning y análisis de datos para

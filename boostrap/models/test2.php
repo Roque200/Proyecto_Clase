@@ -1,7 +1,6 @@
 <?php
 require_once 'sistem.php';
 $sistema = new Sistema();
-$login = $sistema->login('21031190@itcelaya.edu.mx', '12345');
+$logout = $sistema->logout();
 var_dump($login);
-print_r($_SESSION);
 ?>
