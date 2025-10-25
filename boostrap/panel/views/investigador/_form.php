@@ -1,13 +1,3 @@
-<?php
-require_once("../models/institucion.php");
-require_once("../models/tratamiento.php");
-
-$institucionApp = new Institucion();
-$tratamientoApp = new Tratamiento();
-$instituciones = $institucionApp->read();
-$tratamientos = $tratamientoApp->read();
-?>
-
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -48,8 +38,8 @@ $tratamientos = $tratamientoApp->read();
                                     <option value="">Seleccione...</option>
                                     <?php if(!empty($tratamientos)): ?>
                                         <?php foreach($tratamientos as $tratamiento): ?>
-                                            <option value="<?php echo $tratamiento['id_tratamiento']; ?>">
-                                                <?php echo htmlspecialchars($tratamiento['tratamiento']); ?>
+                                            <option value="<?php echo($tratamiento['id_tratamiento']); ?>">
+                                                <?php echo($tratamiento['tratamiento']); ?>
                                             </option>
                                         <?php endforeach; ?>
                                     <?php else: ?>
@@ -68,7 +58,7 @@ $tratamientos = $tratamientoApp->read();
                                     <option value="">Seleccione...</option>
                                     <?php if(!empty($instituciones)): ?>
                                         <?php foreach($instituciones as $institucion): ?>
-                                            <option value="<?php echo $institucion['id_institucion']; ?>">
+                                            <option value="<?php echo ($institucion['id_institucion']); ?>">
                                                 <?php echo ($institucion['instituto']); ?>
                                             </option>
                                         <?php endforeach; ?>
@@ -87,10 +77,28 @@ $tratamientos = $tratamientoApp->read();
                                 <i class="fas fa-camera"></i> Fotografía
                             </label>
                             <input type="file" class="form-control" id="fotografia" name="fotografia" 
-                                   placeholder="investigador.jpg">
+                                   accept="image/*"
+                                   onchange="previewImage(event)">
                             <div class="form-text">
-                                Nombre del archivo de imagen (se guardará en /images/investigadores/)
+                                Seleccione una imagen PNG, JPG, GIF o WebP (máximo 5MB)
                             </div>
+                            
+                            <div class="mt-3" id="preview-container" style="display: none;">
+                                <h6>Vista Previa:</h6>
+                                <img id="preview-image" src="" alt="Vista previa" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="correo electronico" class="form-label">Correo Electronico</label>
+                            <input type="text" class="form-control" id="correo electronico" name="correo electronico"
+                                   placeholder="García">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="text" class="form-control" id="password" name="password"
+                                   placeholder="García">
                         </div>
 
                         <div class="mb-3">
@@ -118,3 +126,24 @@ $tratamientos = $tratamientoApp->read();
         </div>
     </div>
 </div>
+
+<script>
+function previewImage(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById('preview-container');
+    const previewImage = document.getElementById('preview-image');
+    
+    if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewContainer.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(file);
+    } else {
+        previewContainer.style.display = 'none';
+    }
+}
+</script>

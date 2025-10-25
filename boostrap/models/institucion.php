@@ -1,8 +1,6 @@
 <?php
 require_once "sistem.php";
-
 class Institucion extends Sistema{
-    
     function create($data){
         try {
             $this->connect();
@@ -131,12 +129,41 @@ class Institucion extends Sistema{
         }
     }
 
-    // Método auxiliar para verificar la estructura de la tabla
-    function checkTableStructure(){
-        $this->connect();
-        $sth = $this->_BD->prepare("DESCRIBE institucion");
-        $sth->execute();
-        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    function cargarFotografia($file, $carpeta){
+        $tipos_permitidos = array('image/jpeg', 'image/gif', 'image/png', 'image/webp');
+        $tamanio_maximo = 5000000; // 5MB
+        
+        if($file["error"] == 0){
+            if(in_array($file["type"], $tipos_permitidos)){
+                if($file["size"] <= $tamanio_maximo){
+                    $n = rand(1, 1000000);
+                    $nombreArchivo = md5($file['name'] . $file['size'] . $n . time());
+                    $extencion = explode('.', $file['name']);
+                    $extencion = $extencion[count($extencion) - 1];
+                    $nombreArchivo = $nombreArchivo . "." . $extencion;
+                    
+                    // Crear directorio si no existe
+                    $rutaCarpeta = '../images/' . $carpeta . '/';
+                    if(!is_dir($rutaCarpeta)){
+                        mkdir($rutaCarpeta, 0755, true);
+                    }
+                    
+                    $rutaFinal = $rutaCarpeta . $nombreArchivo;
+                    
+                    if(move_uploaded_file($file["tmp_name"], $rutaFinal)){
+                        return $nombreArchivo;
+                    } else {
+                        throw new Exception("Error al guardar la imagen en el servidor");
+                    }
+                } else {
+                    throw new Exception("El archivo es demasiado grande. Máximo 5MB");
+                }
+            } else {
+                throw new Exception("Tipo de archivo no permitido. Use PNG, JPG, GIF o WebP");
+            }
+        } else {
+            throw new Exception("Error al subir el archivo");
+        }
     }
     
     function validate($data){

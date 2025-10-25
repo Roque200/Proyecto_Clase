@@ -33,6 +33,15 @@
                 <li><a class="dropdown-item" href="investigador.php"><i class="fas fa-users"></i> Investigadores</a></li>
               </ul>
             </li>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-folder"></i> Usuario
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="usuario.php"><i class="fas fa-users"></i> Usuarios</a></li>
+              </ul>
+            </li>
           </ul>
           <span class="navbar-text">
             <i class="fas fa-user-shield"></i> Panel de Administración

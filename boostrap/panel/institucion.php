@@ -13,14 +13,32 @@ switch ($action) {
     case 'create':
         if(isset($_POST['enviar'])) {
             $data['instituto'] = $_POST['instituto'];
-            $data['logotipo'] = $_POST['logotipo'];
-            $filas = $app->create($data);
-            if ($filas){
-                $alerta['mensaje'] = "Institución agregada correctamente.";
-                $alerta['tipo'] = "success";
-                include_once('./views/Alert.php');
-            }else{
-                $alerta['mensaje'] = "Error al agregar la institución.";
+            
+            // Manejo de la imagen
+            if(isset($_FILES['logotipo']) && $_FILES['logotipo']['error'] == 0) {
+                $logotipo = $app->cargarFotografia($_FILES['logotipo'], 'instituciones');
+                if($logotipo) {
+                    $data['logotipo'] = $logotipo;
+                } else {
+                    $data['logotipo'] = '';
+                }
+            } else {
+                $data['logotipo'] = '';
+            }
+            
+            try {
+                $filas = $app->create($data);
+                if ($filas){
+                    $alerta['mensaje'] = "Institución agregada correctamente.";
+                    $alerta['tipo'] = "success";
+                    include_once('./views/Alert.php');
+                }else{
+                    $alerta['mensaje'] = "Error al agregar la institución.";
+                    $alerta['tipo'] = "danger";
+                    include_once('./views/Alert.php');
+                }
+            } catch (Exception $e) {
+                $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
                 include_once('./views/Alert.php');
             }
@@ -34,15 +52,43 @@ switch ($action) {
     case 'update':
         if(isset($_POST['enviar'])) {
             $data['instituto'] = $_POST['instituto'];
-            $data['logotipo'] = $_POST['logotipo'];
             $id = $_GET['id'];
-            $filas = $app->update($data, $id);
-            if ($filas){
-                $alerta['mensaje'] = "Institución Modificada correctamente.";
-                $alerta['tipo'] = "success";
-                include_once('./views/Alert.php');
-            }else{
-                $alerta['mensaje'] = "Error al Modificar la institución.";
+            
+            // Obtener la institución actual
+            $institucion_actual = $app->readOne($id);
+            
+            // Manejo de la imagen
+            if(isset($_FILES['logotipo']) && $_FILES['logotipo']['error'] == 0) {
+                $logotipo = $app->cargarFotografia($_FILES['logotipo'], 'instituciones');
+                if($logotipo) {
+                    // Eliminar la imagen anterior si existe
+                    if(!empty($institucion_actual['logotipo'])) {
+                        $ruta_anterior = '../images/instituciones/' . $institucion_actual['logotipo'];
+                        if(file_exists($ruta_anterior)) {
+                            unlink($ruta_anterior);
+                        }
+                    }
+                    $data['logotipo'] = $logotipo;
+                } else {
+                    $data['logotipo'] = $institucion_actual['logotipo'];
+                }
+            } else {
+                $data['logotipo'] = $institucion_actual['logotipo'];
+            }
+            
+            try {
+                $filas = $app->update($data, $id);
+                if ($filas){
+                    $alerta['mensaje'] = "Institución modificada correctamente.";
+                    $alerta['tipo'] = "success";
+                    include_once('./views/Alert.php');
+                }else{
+                    $alerta['mensaje'] = "No se realizaron cambios.";
+                    $alerta['tipo'] = "info";
+                    include_once('./views/Alert.php');
+                }
+            } catch (Exception $e) {
+                $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
                 include_once('./views/Alert.php');
             }
@@ -58,13 +104,29 @@ switch ($action) {
     case 'delete':
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
-            $filas = $app->delete($id);
-            if ($filas){
-                $alerta['mensaje'] = "Institución eliminada correctamente.";
-                $alerta['tipo'] = "success";
-                include_once('./views/Alert.php');
-            }else{
-                $alerta['mensaje'] = "Error al eliminar la institución.";
+            $institucion = $app->readOne($id);
+            
+            // Eliminar la imagen si existe
+            if(!empty($institucion['logotipo'])) {
+                $ruta_imagen = '../images/instituciones/' . $institucion['logotipo'];
+                if(file_exists($ruta_imagen)) {
+                    unlink($ruta_imagen);
+                }
+            }
+            
+            try {
+                $filas = $app->delete($id);
+                if ($filas){
+                    $alerta['mensaje'] = "Institución eliminada correctamente.";
+                    $alerta['tipo'] = "success";
+                    include_once('./views/Alert.php');
+                }else{
+                    $alerta['mensaje'] = "Error al eliminar la institución.";
+                    $alerta['tipo'] = "danger";
+                    include_once('./views/Alert.php');
+                }
+            } catch (Exception $e) {
+                $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
                 include_once('./views/Alert.php');
             }

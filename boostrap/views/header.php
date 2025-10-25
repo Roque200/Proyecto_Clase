@@ -76,6 +76,9 @@
                         <a class="nav-link" href="historia.php">Historia</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="./panel/index.php">Administración</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="comentarios.php">Aclaraciones</a>
                     </li>
                 </ul>
