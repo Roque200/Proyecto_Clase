@@ -3,7 +3,7 @@
     
     <div class="btn-group mb-3" role="group" aria-label="Basic mixed styles example">
         <a class="btn btn-primary">
-            <i class="fas fa-print"></i> Imprimir
+            <i href = "./reporte.php?accion=institucionesInvestigadores" target="_blanck" class="fas fa-print"></i> Imprimir
         </a>
         <a href="institucion.php?action=create" class="btn btn-success">
             <i class="fas fa-plus"></i> Nuevo

@@ -192,5 +192,20 @@ class Institucion extends Sistema{
         
         return true;
     }
+    function reporteInstitucionesInvestigadores(){
+        $this->connect();
+        $sql = "SELECT i.instituto, COUNT(inv.id_investigador) AS total_investigadores
+                FROM institucion i
+                LEFT JOIN investigador inv ON i.id_institucion = inv.id_institucion
+                GROUP BY i.instituto";
+        $stmt = $this->_BD->prepare($sql);
+        $stmt->execute();
+        if ($stmt->rowCount()) {
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        } else {
+            return null;
+        }
+    }
 }
 ?>

@@ -73,6 +73,9 @@
                         <a class="nav-link" href="galeria.php">Galería</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="./panel/login.php">Administrador</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="historia.php">Historia</a>
                     </li>
                     <li class="nav-item">

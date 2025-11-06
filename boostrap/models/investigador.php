@@ -1,69 +1,78 @@
 <?php
 require_once "sistem.php";
-
-class Investigador extends Sistema{
-    
+class Investigador extends Sistema {
     function create($data){
-        if(!$this->validate($data)){
-            return null;
-        }
-        
         $this->connect();
-        $this->_BD->beginTransaction();
+        $this -> _BD -> beginTransaction();
         try {
-            $sql = "INSERT INTO investigador (primer_apellido, segundo_apellido, nombre, fotografia, 
-                    id_institucion, semblanza, id_tratamiento) 
-                    VALUES (:primer_apellido, :segundo_apellido, :nombre, :fotografia, 
-                    :id_institucion, :semblanza, :id_tratamiento)";
-            
+            $sql= ("INSERT INTO investigador (primer_apellido, segundo_apellido, nombre, fotografia, id_institucion, semblanza, id_tratamiento) 
+                    VALUES (:primer_apellido, :segundo_apellido, :nombre, :fotografia, :id_institucion, :semblanza, :id_tratamiento)");
             $sth = $this->_BD->prepare($sql);
             $sth->bindParam(":primer_apellido", $data['primer_apellido'], PDO::PARAM_STR);
             $sth->bindParam(":segundo_apellido", $data['segundo_apellido'], PDO::PARAM_STR);
             $sth->bindParam(":nombre", $data['nombre'], PDO::PARAM_STR);
-            $sth->bindParam(":fotografia", $data['fotografia'], PDO::PARAM_STR);
+            $sth->bindParam(":semblanza", $data['semblanza'], PDO::PARAM_STR);
             $sth->bindParam(":id_institucion", $data['id_institucion'], PDO::PARAM_INT);
-            $sth->bindParam(":semblanza", $data['semblance'], PDO::PARAM_STR);
             $sth->bindParam(":id_tratamiento", $data['id_tratamiento'], PDO::PARAM_INT);
+            $fotografia = $this->cargarFotografia('investigadores','fotografia');
+            $sth->bindParam(":fotografia", $fotografia, PDO::PARAM_STR);
             $sth->execute();
-            $rows_affected = $sth->rowCount();
-            $sql = "INSERT INTO usuario (correo,password) 
+            $affected_rows = $sth->rowCount();
+            $sql = "INSERT INTO usuario (correo, password) 
                     VALUES (:correo, :password)";
-            $sql = $this->_BD->prepare($sql);
-            $sql->bindParam(":correo", $data['correo'], PDO::PARAM_STR);
-            $sql->bindParam($data['password']);
-            $sth->bindParam(":password",$pwd ,PDO::PARAM_STR);
-            $sql->execute();
-            $sql = "INSERT INTO usuario WHERE correo=:correo";
             $sth = $this->_BD->prepare($sql);
-            $sql->bindParam(":correo", $data['correo'], PDO::PARAM_STR);
-            $sql->execute();
-            $user = $sth ->fetch(PDO::FETCH_ASSOC);
-
+            $sth->bindParam(":correo", $data['correo'], PDO::PARAM_STR);
+            $pwd = md5($data['password']);
+            $sth->bindParam(":password", $pwd, PDO::PARAM_STR);
+            $sth->execute();
+            $sql = "SELECT * from usuario WHERE correo = :correo";
+            $sth = $this->_BD->prepare($sql);
+            $sth->bindParam(":correo", $data['correo'], PDO::PARAM_STR);
+            $sth->execute();
+            $user = $sth->fetch(PDO::FETCH_ASSOC);
             $id_usuario = $user['id_usuario'];
-            $sql = "INSERT INTO usuario_rol (id_rol, id_usuario) 
-                    VALUES (2, :id_usuario)";
+            $sql = "INSERT INTO usuario_role (id_role, id_usuario)
+                    VALUES (:id_role, :id_usuario)";
             $sth = $this->_BD->prepare($sql);
-            $sth->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);   
+            $id_role=2;
+            $sth->bindParam(":id_role", $id_role, PDO::PARAM_INT);
+            $sth->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
             $sth->execute();
-            $sql = "SELECT * FROM investigador order by id_investigador desc limit 1";
+            $id_role=3;
+            $sth->bindParam(":id_role", $id_role, PDO::PARAM_INT);
+            $sth->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
+            $sth->execute();
+            $sql = "SELECT * from investigador order by id_investigador DESC LIMIT 1";
             $sth = $this->_BD->prepare($sql);
             $sth->execute();
-            $investigador = $sth ->fetch(PDO::FETCH_ASSOC);
+            $investigador = $sth->fetch(PDO::FETCH_ASSOC);
             $id_investigador = $investigador['id_investigador'];
-            $sql = "UPDATE investigador SET id_usuario = :id_usuario WHERE id_investigador = :id_investigador";
+            $sql = "UPDATE investigador set id_usuario = :id_usuario 
+                    WHERE id_investigador = :id_investigador";
             $sth = $this->_BD->prepare($sql);
             $sth->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
             $sth->bindParam(":id_investigador", $id_investigador, PDO::PARAM_INT);
             $sth->execute();
-            $this->_BD->commit();
-            return $rows_affected;
+            $destinatario = $data['correo'];
+            $asunto = "Bienvenido a la Red de investigación";
+            $mensaje = "Hola " . $data['nombre'] ." ". $data['primer_apellido']. ",<br><br>
+                        Gracias por registrarte en la Red de investigación del ITCelaya.<br><br>
+                        Tus datos de acceso son:<br>
+                        Correo: " . $data['correo'] . "<br>
+                        Contraseña: " . $data['password'] . "<br><br>
+                        Saludos,<br>
+                        Red de investigación ITCelaya";
+            $nombre = $data['nombre'] ." ". $data['primer_apellido']." ". $data['segundo_apellido'];
+            $mail = $this->enviarCorreo($destinatario, $asunto, $mensaje, $nombre);
+            $this->_BD -> commit();
+            return $affected_rows;
         } catch (Exception $ex) {
-            $this->_BD->rollback();
-            error_log("Error en create investigador: " . $ex->getMessage());
-            throw new Exception("Error al crear investigador: " . $ex->getMessage());
+            //print_r($data);
+            $this->_BD -> rollback();
+            //die();
         }
+        return null;
     }
-
     function read(){
         $this->connect();
         $sth = $this->_BD->prepare("

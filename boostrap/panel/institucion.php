@@ -14,7 +14,6 @@ switch ($action) {
         if(isset($_POST['enviar'])) {
             $data['instituto'] = $_POST['instituto'];
             
-            // Manejo de la imagen
             if(isset($_FILES['logotipo']) && $_FILES['logotipo']['error'] == 0) {
                 $logotipo = $app->cargarFotografia($_FILES['logotipo'], 'instituciones');
                 if($logotipo) {
@@ -54,7 +53,6 @@ switch ($action) {
             $data['instituto'] = $_POST['instituto'];
             $id = $_GET['id'];
             
-            // Obtener la institución actual
             $institucion_actual = $app->readOne($id);
             
             // Manejo de la imagen
