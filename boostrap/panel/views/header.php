@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a href="../index.php" class="nav-link">
+              <a href="index.php" class="nav-link">
                 <i class="fas fa-home"></i> Inicio
               </a>
             </li>
@@ -33,13 +33,24 @@
                 <li><a class="dropdown-item" href="investigador.php"><i class="fas fa-users"></i> Investigadores</a></li>
               </ul>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-file-pdf"></i> Reportes
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="reportes.php"><i class="fas fa-list"></i> Menú de Reportes</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="reportes.php?accion=institucionesInvestigadores" target="_blank">
+                  <i class="fas fa-university"></i> Instituciones e Investigadores
+                </a></li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-folder"></i> Usuario
+                <i class="fas fa-users-cog"></i> Usuarios
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="usuario.php"><i class="fas fa-users"></i> Usuarios</a></li>
+                <li><a class="dropdown-item" href="usuario.php"><i class="fas fa-users"></i> Gestión de Usuarios</a></li>
               </ul>
             </li>
           </ul>
