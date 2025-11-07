@@ -1,0 +1,22 @@
+REPORTE DE USUARIOS - SIGA ITC
+Generado: 07/11/2025 20:33:25
+================================================================================
+
+ID    | NOMBRE               | APELLIDOS            | EMAIL                     | TIPO           
+--------------------------------------------------------------------------------
+7     | María               | Hernández López    | maria.hernandez@itcelaya. | docente        
+8     | Carlos               | Ramírez González   | admin@itcelaya.edu.mx     | administrador  
+11    | Ana                  | López Flores        | ana.lopez@itcelaya.edu.mx | estudiante     
+12    | Luis                 | Morales Cruz         | luis.morales@itcelaya.edu | estudiante     
+14    | Pedro                | Sánchez Martínez   | pedro.sanchez@itcelaya.ed | docente        
+16    |  Christian           | Ponce Gonzalez       | 22030935@itcelaya.edu.mx  | estudiante     
+17    | Oscar Uriel          | Montalvo Canno       | 22030755@itcelaya.edu.mx  | estudiante     
+18    | Josue                | Yañez Rojas         | 22030101@itcelaya.edu.mx  | estudiante     
+19    | Juan                 | Pérez García       | juan.perez@itcelaya.edu.m | estudiante     
+20    | Jesús  Roberto      | Perez Roque          | 21031190@itcelaya.edu.mx  | estudiante     
+21    | María               | González Ruiz       | maria.gonzalez@itcelaya.e | docente        
+23    | Carlos               | Cortez Naranjo       | 22031446@itcelaya.edu.mx  | estudiante     
+24    | Paulina              | Escalante Sanchez    | paulina.sanchez@itcelaya. | estudiante     
+25    | Ana 	                | Sanchez Torrez       | ana.sanchez@itcelaya.edu. | estudiante     
+27    | Xanna Regina         | Ramírez González   | regiglez16@itcelaya.edu.m | estudiante     
+28    | Carlos Enilio        | Sarmiento Almanza    | 22030535@itcelaya.edu.mx  | estudiante     
