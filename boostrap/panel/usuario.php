@@ -1,11 +1,11 @@
 <?php
-require_once("../models/usuario.php");
+require_once(__DIR__."../models/usuario.php");
 $app = new Usuario();
 $action = isset($_GET['action']) ? $_GET['action'] : 'read';
 $data = array();
 $alerta = array();
 
-include_once("./views/header.php");
+include_once(__DIR__.__DIR__."./views/header.php");
 
 switch ($action) {
     
@@ -28,11 +28,11 @@ switch ($action) {
                 $alerta['tipo'] = "danger";
             }
             
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
             $data = $app->read();
-            include_once("./views/usuario/index.php");
+            include_once(__DIR__."./views/usuario/index.php");
         } else {
-            include_once("./views/usuario/_form.php");
+            include_once(__DIR__."./views/usuario/_form.php");
         }
         break;
 
@@ -56,20 +56,20 @@ switch ($action) {
                 $alerta['tipo'] = "danger";
             }
             
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
             $data = $app->read();
-            include_once("./views/usuario/index.php");
+            include_once(__DIR__."./views/usuario/index.php");
         } else {
             $id = $_GET['id'];
             $data = $app->readOne($id);
             if(!$data){
                 $alerta['mensaje'] = "Usuario no encontrado";
                 $alerta['tipo'] = "danger";
-                include_once("./views/alert.php");
+                include_once(__DIR__."./views/alert.php");
                 $data = $app->read();
-                include_once("./views/usuario/index.php");
+                include_once(__DIR__."./views/usuario/index.php");
             } else {
-                include_once("./views/usuario/_form_update.php");
+                include_once(__DIR__."./views/usuario/_form_update.php");
             }
         }
         break;
@@ -85,10 +85,10 @@ switch ($action) {
                 $alerta['mensaje'] = "El usuario no fue eliminado";
                 $alerta['tipo'] = "danger";
             }
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
         }
         $data = $app->read();
-        include_once("./views/usuario/index.php");
+        include_once(__DIR__."./views/usuario/index.php");
         break;
     
     case 'readRole':
@@ -101,18 +101,18 @@ switch ($action) {
             if(!$usuario){
                 $alerta['mensaje'] = "Usuario no encontrado";
                 $alerta['tipo'] = "danger";
-                include_once("./views/alert.php");
+                include_once(__DIR__."./views/alert.php");
                 $data = $app->read();
-                include_once("./views/usuario/index.php");
+                include_once(__DIR__."./views/usuario/index.php");
             } else {
-                include_once("./views/usuario/roles.php");
+                include_once(__DIR__."./views/usuario/roles.php");
             }
         } else {
             $alerta['mensaje'] = "ID de usuario no especificado";
             $alerta['tipo'] = "danger";
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
             $data = $app->read();
-            include_once("./views/usuario/index.php");
+            include_once(__DIR__."./views/usuario/index.php");
         }
         break;
     
@@ -136,8 +136,8 @@ switch ($action) {
             $roles_usuario = $app->getRolesByUser($id_usuario);
             $todos_roles = $app->getAllRoles();
             
-            include_once("./views/alert.php");
-            include_once("./views/usuario/roles.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/usuario/roles.php");
         }
         break;
     
@@ -158,17 +158,17 @@ switch ($action) {
             $roles_usuario = $app->getRolesByUser($id_usuario);
             $todos_roles = $app->getAllRoles();
             
-            include_once("./views/alert.php");
-            include_once("./views/usuario/roles.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/usuario/roles.php");
         }
         break;
     
     case 'read':
     default:
         $data = $app->read();
-        include_once("./views/usuario/index.php");
+        include_once(__DIR__."./views/usuario/index.php");
         break;
 }
 
-include_once("./views/footer.php");
+include_once(__DIR__."./views/footer.php");
 ?>

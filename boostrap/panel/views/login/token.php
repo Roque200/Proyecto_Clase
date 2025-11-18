@@ -1,5 +1,5 @@
 <?php 
-include_once("./views/login/header.php");
+include_once(__DIR__."./views/login/header.php");
 ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -53,5 +53,5 @@ include_once("./views/login/header.php");
 </script>
 
 <?php 
-include_once('./views/login/footer.php');
+include_once(__DIR__.'./views/login/footer.php');
 ?>

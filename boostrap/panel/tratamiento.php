@@ -7,7 +7,7 @@ $app = new Tratamiento();
 $action = isset($_GET['action']) ? $_GET['action'] : 'read';
 $data = array();
 
-include_once('./views/header.php');
+include_once(__DIR__.'./views/header.php');
 
 switch ($action) {
     case 'create':
@@ -26,11 +26,11 @@ switch ($action) {
                 $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
             }
-            include_once('./views/alert.php');
+            include_once(__DIR__.'./views/alert.php');
             $data = $app->read();
-            include_once('views/tratamiento/index.php');
+            include_once(__DIR__.'views/tratamiento/index.php');
         } else {
-            include_once('views/tratamiento/_form.php');
+            include_once(__DIR__.'views/tratamiento/_form.php');
         }
         break;
 
@@ -51,20 +51,20 @@ switch ($action) {
                 $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
             }
-            include_once('./views/alert.php');
+            include_once(__DIR__.'./views/alert.php');
             $data = $app->read();
-            include_once('views/tratamiento/index.php');
+            include_once(__DIR__.'views/tratamiento/index.php');
         } else {
             $id = $_GET['id'];
             $data = $app->readOne($id);
             if($data){
-                include_once('views/tratamiento/_form_update.php');
+                include_once(__DIR__.'views/tratamiento/_form_update.php');
             } else {
                 $alerta['mensaje'] = "Tratamiento no encontrado.";
                 $alerta['tipo'] = "danger";
-                include_once('./views/alert.php');
+                include_once(__DIR__.'./views/alert.php');
                 $data = $app->read();
-                include_once('views/tratamiento/index.php');
+                include_once(__DIR__.'views/tratamiento/index.php');
             }
         }
         break;
@@ -85,18 +85,18 @@ switch ($action) {
                 $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
             }
-            include_once('./views/alert.php');
+            include_once(__DIR__.'./views/alert.php');
         }
         $data = $app->read();
-        include_once('views/tratamiento/index.php');
+        include_once(__DIR__.'views/tratamiento/index.php');
         break;
         
     case 'read':
     default:
         $data = $app->read();
-        include_once('views/tratamiento/index.php');
+        include_once(__DIR__.'views/tratamiento/index.php');
         break;
 }
 
-include_once('./views/footer.php');
+include_once(__DIR__.'./views/footer.php');
 ?>

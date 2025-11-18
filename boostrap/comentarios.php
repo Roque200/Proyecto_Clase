@@ -1,5 +1,5 @@
 <?php
-include_once("./views/header.php"); 
+include_once(__DIR__."./views/header.php"); 
 ?>
     <main class="container">
         <div class="row">
@@ -209,5 +209,5 @@ include_once("./views/header.php");
     <br>
 
        <?php
-include_once("./views/footer.php"); 
+include_once(__DIR__."./views/footer.php"); 
 ?>

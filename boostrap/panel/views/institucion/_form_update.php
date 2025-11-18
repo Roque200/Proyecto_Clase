@@ -70,8 +70,6 @@
                                 </div>
                             <?php endif; ?>
                         </div>
-
-                        <!-- Vista previa de la nueva imagen -->
                         <div class="mb-3" id="preview-container" style="display: none;">
                             <h6><i class="fas fa-eye"></i> Vista Previa de Nueva Imagen:</h6>
                             <div class="card bg-light">

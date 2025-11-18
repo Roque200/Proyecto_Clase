@@ -8,15 +8,12 @@
         </div>
         <div class="card-body">
             
-            <!-- Botón volver -->
             <a href="usuario.php?action=read" class="btn btn-secondary mb-4">
                 <i class="bi bi-arrow-left"></i> Volver a Usuarios
             </a>
             
-            <!-- Contenedor principal en dos columnas -->
             <div class="row">
                 
-                <!-- Columna izquierda: Asignar roles -->
                 <div class="col-md-6">
                     <div class="card border-info">
                         <div class="card-header bg-info text-white">
@@ -35,7 +32,6 @@
                                         <?php 
                                         if(!empty($todos_roles)):
                                             foreach($todos_roles as $rol):
-                                                // Verificar si el usuario ya tiene este rol
                                                 $ya_tiene = false;
                                                 foreach($roles_usuario as $rol_usuario):
                                                     if($rol_usuario['id_role'] == $rol['id_role']):
@@ -65,7 +61,6 @@
                     </div>
                 </div>
                 
-                <!-- Columna derecha: Roles actuales del usuario -->
                 <div class="col-md-6">
                     <div class="card border-success">
                         <div class="card-header bg-success text-white">
@@ -117,7 +112,6 @@
                 
             </div>
             
-            <!-- Información adicional -->
             <div class="mt-4">
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
                     <i class="bi bi-info-circle"></i>

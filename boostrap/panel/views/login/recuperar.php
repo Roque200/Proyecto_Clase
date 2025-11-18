@@ -1,5 +1,5 @@
 <?php 
-include_once("./views/login/header.php");
+include_once(__DIR__."./views/login/header.php");
 ?>
 <form action="login.php?action=cambio" method="post">
     <div class="mb-3 row">
@@ -15,5 +15,5 @@ include_once("./views/login/header.php");
 <a href="./login.php"><button class="btn btn-danger">Cancelar</button></a>
 
 <?php 
-include_once('./views/login/footer.php');
+include_once(__DIR__.'./views/login/footer.php');
 ?>

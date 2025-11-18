@@ -1,5 +1,5 @@
 <?php
-include_once("./views/header.php"); 
+include_once(__DIR__."./views/header.php"); 
 ?>
     <br>
     <div class="container text-center">
@@ -423,7 +423,7 @@ include_once("./views/header.php");
             </section>
     </main>
  <?php
-include_once("./views/footer.php"); 
+include_once(__DIR__."./views/footer.php"); 
 ?>
 
     

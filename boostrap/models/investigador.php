@@ -207,6 +207,7 @@ class Investigador extends Sistema {
                 } else {
                     throw new Exception("El archivo es demasiado grande. Máximo 5MB");
                 }
+                
             } else {
                 throw new Exception("Tipo de archivo no permitido. Use PNG, JPG, GIF o WebP");
             }

@@ -38,9 +38,7 @@
                             <div class="form-text">
                                 Seleccione una imagen PNG, JPG o GIF (máximo 5MB)
                             </div>
-                            
-                            <!-- Vista previa de la imagen -->
-                            <div class="mt-3" id="preview-container" style="display: none;">
+                                <div class="mt-3" id="preview-container" style="display: none;">
                                 <h6>Vista Previa:</h6>
                                 <img id="preview-image" src="" alt="Vista previa" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                             </div>

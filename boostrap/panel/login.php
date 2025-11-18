@@ -1,5 +1,5 @@
 <?php 
-include_once("../models/sistem.php");
+include_once(__DIR__."../models/sistem.php");
 $app = new Sistema();
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
@@ -15,13 +15,13 @@ switch ($action) {
         if ($cambio) {
             $alerta['mensaje'] = "Se ha enviado un correo con instrucciones para cambiar tu contraseña.";
             $alerta['tipo'] = "success";
-            include_once("./views/alert.php");
-            include_once("./views/login/login.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/login/login.php");
         } else {
             $alerta['mensaje'] = "No se pudo recuperar la contraseña. Verifique el correo ingresado.";
             $alerta['tipo'] = "danger";
-            include_once("./views/alert.php");
-            include_once("./views/login/recuperar.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/login/recuperar.php");
         }
         break;
 
@@ -35,8 +35,8 @@ switch ($action) {
         if(!isset($data['correo']) || !isset($data['token']) || !isset($data['contrasena'])){
             $alerta['mensaje'] = "Datos incompletos.";
             $alerta['tipo'] = "danger";
-            include_once("./views/alert.php");
-            include_once("./views/login/login.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/login/login.php");
             break;
         }
         
@@ -44,14 +44,14 @@ switch ($action) {
         if ($restablecer) {
             $alerta['mensaje'] = "Contraseña restablecida correctamente. Por favor inicia sesión.";
             $alerta['tipo'] = "success";
-            include_once("./views/alert.php");
-            include_once("./views/login/login.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/login/login.php");
         } else {
             $alerta['mensaje'] = "No se pudo restablecer la contraseña. El enlace puede estar expirado.";
             $alerta['tipo'] = "danger";
             $peticion = array('token' => $data['token'], 'correo' => $data['correo']);
-            include_once("./views/alert.php");
-            include_once("./views/login/token.php");
+            include_once(__DIR__."./views/alert.php");
+            include_once(__DIR__."./views/login/token.php");
         }
         break;
 
@@ -70,16 +70,16 @@ switch ($action) {
             } else {
                 $alerta['mensaje'] = "Correo o contraseña incorrecta";
                 $alerta['tipo'] = "danger";
-                include_once("./views/alert.php");
-                include_once("./views/login/login.php");
+                include_once(__DIR__."./views/alert.php");
+                include_once(__DIR__."./views/login/login.php");
             }
         } else {
-            include_once("./views/login/login.php");
+            include_once(__DIR__."./views/login/login.php");
         }
         break;
 
     default:
-        include_once("./views/login/login.php");
+        include_once(__DIR__."./views/login/login.php");
         break;
 }
 ?>

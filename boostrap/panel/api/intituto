@@ -1,0 +1,59 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const Institucion = require('../../models/institucion'); 
+
+const app = express();
+app.use(bodyParser.json());
+
+app.get('/', async (req, res) => {
+    const id = req.query.id;
+    try {
+        if (id) {
+            const data = await Institucion.readOne(id);
+            res.json(data);
+        } else {
+            const data = await Institucion.read();
+            res.json(data);
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error al obtener la institución.' });
+    }
+});
+
+app.post('/', async (req, res) => {
+    const id = req.query.id;
+    const data = req.body;
+    try {
+        if (id) {
+            await Institucion.update(data, id);
+            res.json({ ...data, message: 'Institución actualizada correctamente.' });
+        } else {
+            await Institucion.create(data);
+            res.json({ ...data, message: 'Institución creada correctamente.' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error al guardar la institución.' });
+    }
+});
+
+app.delete('/', async (req, res) => {
+    const id = req.query.id;
+    try {
+        if (id) {
+            const result = await Institucion.delete(id);
+            if (result) {
+                res.json({ message: 'Institución eliminada correctamente.' });
+            } else {
+                res.json({ message: 'No se pudo eliminar la institución.' });
+            }
+        } else {
+            res.status(400).json({ message: 'ID requerido para eliminar.' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error al eliminar la institución.' });
+    }
+});
+
+app.listen(3000, () => {
+    console.log('API escuchando en puerto 3000');
+});

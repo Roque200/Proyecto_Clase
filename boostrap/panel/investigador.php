@@ -2,9 +2,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once("../models/investigador.php");
-require_once("../models/institucion.php");
-require_once("../models/tratamiento.php");
+require_once(__DIR__."../models/investigador.php");
+require_once(__DIR__."../models/institucion.php");
+require_once(__DIR__."../models/tratamiento.php");
 
 $app = new Investigador();
 $institucionApp = new Institucion();
@@ -12,7 +12,7 @@ $tratamientoApp = new Tratamiento();
 $action = isset($_GET['action']) ? $_GET['action'] : 'read';
 $data = array();
 
-include_once("./views/header.php");
+include_once(__DIR__."./views/header.php");
 
 switch ($action) {
     case 'create':
@@ -38,13 +38,13 @@ switch ($action) {
                 $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
             }
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
             $data = $app->read();
-            include_once("./views/investigador/index.php");
+            include_once(__DIR__."./views/investigador/index.php");
         } else {
             $instituciones = $institucionApp->read();
             $tratamientos = $tratamientoApp->read();
-            include_once("./views/investigador/_form.php");
+            include_once(__DIR__."./views/investigador/_form.php");
         }
         break;
 
@@ -93,30 +93,30 @@ switch ($action) {
                 $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
             }
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
             $data = $app->read();
-            include_once("./views/investigador/index.php");
+            include_once(__DIR__."./views/investigador/index.php");
         } else {
             $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : null;
             
             if (!$id) {
                 $alerta['mensaje'] = "ID de investigador no válido.";
                 $alerta['tipo'] = "danger";
-                include_once("./views/alert.php");
+                include_once(__DIR__."./views/alert.php");
                 $data = $app->read();
-                include_once("./views/investigador/index.php");
+                include_once(__DIR__."./views/investigador/index.php");
             } else {
                 $data = $app->readOne($id);
                 if($data){
                     $instituciones = $institucionApp->read();
                     $tratamientos = $tratamientoApp->read();
-                    include_once("./views/investigador/_form_update.php");
+                    include_once(__DIR__."./views/investigador/_form_update.php");
                 } else {
                     $alerta['mensaje'] = "Investigador no encontrado.";
                     $alerta['tipo'] = "danger";
-                    include_once("./views/alert.php");
+                    include_once(__DIR__."./views/alert.php");
                     $data = $app->read();
-                    include_once("./views/investigador/index.php");
+                    include_once(__DIR__."./views/investigador/index.php");
                 }
             }
         }
@@ -150,18 +150,18 @@ switch ($action) {
                 $alerta['mensaje'] = "Error: " . $e->getMessage();
                 $alerta['tipo'] = "danger";
             }
-            include_once("./views/alert.php");
+            include_once(__DIR__."./views/alert.php");
         }
         $data = $app->read();
-        include_once("./views/investigador/index.php");
+        include_once(__DIR__."./views/investigador/index.php");
         break;
     
     case 'read':
     default:
         $data = $app->read();
-        include_once("./views/investigador/index.php");
+        include_once(__DIR__."./views/investigador/index.php");
         break;
 }
 
-include_once("./views/footer.php");
+include_once(__DIR__."./views/footer.php");
 ?>

@@ -1,11 +1,7 @@
 </div>
 
-    <!-- Scripts de Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Script personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
     <script>
-        // Validar contraseña coincida en formulario crear
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('form');
             
